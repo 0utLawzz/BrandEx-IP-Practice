@@ -48,3 +48,11 @@ This ensures all work is automatically backed up to the GitHub repository (https
 - Use TanStack Router for routing
 - Use TanStack Query for server state management
 - Follow existing code style and patterns
+
+## Testing
+
+- Run tests before committing: `npm test -- --run`
+- Run production build before committing: `npm run build`
+- Run linting before committing: `npm run lint`
+- Fix any failing tests or build errors before committing
+- All tests must pass before pushing changes
