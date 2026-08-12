@@ -1,12 +1,7 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { appConfig } from '../../config/app.config'
 
 describe('App Configuration', () => {
-  beforeEach(() => {
-    // Reset environment before each test
-    vi.resetModules()
-  })
-
   it('has correct app name', () => {
     expect(appConfig.name).toBe('BrandEx IP Practice')
   })
