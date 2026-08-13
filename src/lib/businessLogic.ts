@@ -1,8 +1,8 @@
-import type { ClientType, PaymentStatus } from '../types';
+import type { ClientSeries, PaymentStatus } from '../types';
 
 // Client Code Formatting
-export function formatClientCode(clientType: ClientType, clientNumber: string): string {
-  return `${clientType}-${clientNumber}`;
+export function formatClientCode(series: ClientSeries, clientNumber: string): string {
+  return `${series}-${clientNumber}`;
 }
 
 // Matter Number Generation
@@ -50,4 +50,50 @@ export const trademarkWorkflow: Record<string, string[]> = {
 export function isValidTrademarkStatusTransition(currentStatus: string, newStatus: string): boolean {
   const allowedTransitions = trademarkWorkflow[currentStatus] || [];
   return allowedTransitions.includes(newStatus);
+}
+
+// Validation Functions
+export function validateClientCode(clientCode: string): boolean {
+  const regex = /^[A-E]-\d{3}$/;
+  return regex.test(clientCode);
+}
+
+export function validateMatterNumber(matterNumber: string): boolean {
+  const regex = /^[A-E]-\d{3}-\d{3}$/;
+  return regex.test(matterNumber);
+}
+
+export function validatePositiveAmount(amount: number): boolean {
+  return amount > 0;
+}
+
+export function validateNonNegativeAmount(amount: number): boolean {
+  return amount >= 0;
+}
+
+export function validatePhoneNumber(phone?: string): boolean {
+  if (!phone) return true; // Optional field
+  const regex = /^[\d\s\-+()]+$/;
+  return regex.test(phone);
+}
+
+export function validateEmail(email?: string): boolean {
+  if (!email) return true; // Optional field
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+export function validateCnic(cnic?: string): boolean {
+  if (!cnic) return true; // Optional field
+  const regex = /^\d{5}-\d{7}-\d{1}$/;
+  return regex.test(cnic);
+}
+
+export function validateTrademarkClass(trademarkClass: number): boolean {
+  return trademarkClass >= 1 && trademarkClass <= 45;
+}
+
+export function validateDate(date: string): boolean {
+  const parsedDate = new Date(date);
+  return !isNaN(parsedDate.getTime());
 }

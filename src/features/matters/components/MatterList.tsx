@@ -1,20 +1,41 @@
+import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
-import { mockMatters, mockClients } from '../../../data/mockData';
+import { matterRepository, clientRepository } from '../../../services/dataRepository';
+import { CreateMatterForm } from './CreateMatterForm';
 
 export function MatterList() {
-  const mattersWithClients = mockMatters.map(matter => ({
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [matters, setMatters] = useState(matterRepository.getAll());
+  const clients = clientRepository.getAll();
+
+  const mattersWithClients = matters.map(matter => ({
     ...matter,
-    client: mockClients.find(c => c.id === matter.clientId),
+    client: clients.find(c => c.id === matter.clientId),
   }));
+
+  const handleMatterCreated = () => {
+    setMatters(matterRepository.getAll());
+    setShowCreateForm(false);
+  };
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-50">Cases / Matters</h1>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+        <button 
+          onClick={() => setShowCreateForm(true)}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
           Add Matter
         </button>
       </div>
+
+      {showCreateForm && (
+        <CreateMatterForm 
+          onSuccess={handleMatterCreated}
+          onCancel={() => setShowCreateForm(false)}
+        />
+      )}
 
       <div className="bg-white dark:bg-slate-800 rounded-lg shadow overflow-hidden">
         <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">

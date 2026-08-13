@@ -1,15 +1,35 @@
+import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
-import { mockClients } from '../../../data/mockData';
+import { clientRepository } from '../../../services/dataRepository';
+import { CreateClientForm } from './CreateClientForm';
 
 export function ClientList() {
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [clients, setClients] = useState(clientRepository.getAll());
+
+  const handleClientCreated = () => {
+    setClients(clientRepository.getAll());
+    setShowCreateForm(false);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-50">Clients</h1>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+        <button 
+          onClick={() => setShowCreateForm(true)}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
           Add Client
         </button>
       </div>
+
+      {showCreateForm && (
+        <CreateClientForm 
+          onSuccess={handleClientCreated}
+          onCancel={() => setShowCreateForm(false)}
+        />
+      )}
 
       <div className="bg-white dark:bg-slate-800 rounded-lg shadow overflow-hidden">
         <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
@@ -33,7 +53,7 @@ export function ClientList() {
             </tr>
           </thead>
           <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
-            {mockClients.map((client) => (
+            {clients.map((client) => (
               <tr key={client.id} className="hover:bg-slate-50 dark:hover:bg-slate-700">
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-slate-50">
                   {client.clientCode}

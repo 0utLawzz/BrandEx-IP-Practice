@@ -1,10 +1,10 @@
 import { useParams, Link } from '@tanstack/react-router';
-import { mockClients, mockMatters } from '../../../data/mockData';
+import { clientRepository, matterRepository } from '../../../services/dataRepository';
 
 export function ClientDetail() {
   const { clientId } = useParams({ from: '/clients/$clientId' });
-  const client = mockClients.find(c => c.id === clientId);
-  const clientMatters = mockMatters.filter(m => m.clientId === clientId);
+  const client = clientRepository.getById(clientId || '');
+  const clientMatters = client ? matterRepository.getByClientId(client.id) : [];
 
   if (!client) {
     return <div className="text-slate-600 dark:text-slate-400">Client not found</div>;
@@ -29,8 +29,8 @@ export function ClientDetail() {
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Client Information</h2>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <p className="text-sm text-slate-600 dark:text-slate-400">Client Type</p>
-            <p className="font-medium text-slate-900 dark:text-slate-50">{client.clientType}</p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Series</p>
+            <p className="font-medium text-slate-900 dark:text-slate-50">{client.series}</p>
           </div>
           <div>
             <p className="text-sm text-slate-600 dark:text-slate-400">Client Number</p>

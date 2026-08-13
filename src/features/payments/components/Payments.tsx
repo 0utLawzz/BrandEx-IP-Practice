@@ -1,9 +1,9 @@
-import { mockPayments, mockMatters, mockClients } from '../../../data/mockData';
+import { paymentRepository, matterRepository, clientRepository } from '../../../services/dataRepository';
 
 export function Payments() {
-  const paymentsWithDetails = mockPayments.map(payment => {
-    const matter = mockMatters.find(m => m.id === payment.matterId);
-    const client = matter ? mockClients.find(c => c.id === matter.clientId) : null;
+  const paymentsWithDetails = paymentRepository.getAll().map(payment => {
+    const matter = matterRepository.getById(payment.matterId);
+    const client = matter ? clientRepository.getById(matter.clientId) : null;
     return {
       ...payment,
       matter,

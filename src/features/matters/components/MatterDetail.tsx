@@ -1,22 +1,32 @@
+import { useState } from 'react';
 import { useParams, Link } from '@tanstack/react-router';
-import { mockMatters, mockClients, mockLedgerEntries, mockPayments } from '../../../data/mockData';
+import { matterRepository, clientRepository, ledgerRepository, paymentRepository } from '../../../services/dataRepository';
+import { AddLedgerEntryForm } from '../../ledger/components/AddLedgerEntryForm';
 import { calculateBalance, calculatePaymentStatus } from '../../../lib/businessLogic';
 
 export function MatterDetail() {
   const { matterId } = useParams({ from: '/matters/$matterId' });
-  const matter = mockMatters.find(m => m.id === matterId);
-  const client = matter ? mockClients.find(c => c.id === matter.clientId) : null;
-  const ledgerEntries = mockLedgerEntries.filter(l => l.matterId === matterId);
-  const payments = mockPayments.filter(p => p.matterId === matterId);
+  const [showAddLedgerForm, setShowAddLedgerForm] = useState(false);
+  
+  const matter = matterRepository.getById(matterId || '');
+  const client = matter ? clientRepository.getById(matter.clientId) : null;
+  const ledgerEntries = matter ? ledgerRepository.getByMatterId(matter.id) : [];
+  const payments = matter ? paymentRepository.getByMatterId(matter.id) : [];
 
   if (!matter) {
     return <div className="text-slate-600 dark:text-slate-400">Matter not found</div>;
   }
 
   const totalDue = ledgerEntries.reduce((sum, entry) => sum + entry.due, 0);
-  const totalReceived = payments.reduce((sum, payment) => sum + payment.amount, 0);
+  const totalReceived = ledgerEntries.reduce((sum, entry) => sum + entry.received, 0);
   const totalBalance = calculateBalance(totalDue, totalReceived);
   const paymentStatus = calculatePaymentStatus(totalDue, totalReceived);
+
+  const handleLedgerEntryAdded = () => {
+    setShowAddLedgerForm(false);
+    // Force re-render by relying on parent component or state management
+    window.location.reload();
+  };
 
   return (
     <div className="space-y-6">
@@ -72,7 +82,22 @@ export function MatterDetail() {
       </div>
 
       <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Ledger Entries</h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Ledger Entries</h2>
+          <button 
+            onClick={() => setShowAddLedgerForm(true)}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Add Ledger Entry
+          </button>
+        </div>
+        {showAddLedgerForm && (
+          <AddLedgerEntryForm 
+            matterId={matter.id}
+            onSuccess={handleLedgerEntryAdded}
+            onCancel={() => setShowAddLedgerForm(false)}
+          />
+        )}
         {ledgerEntries.length === 0 ? (
           <p className="text-slate-600 dark:text-slate-400">No ledger entries found</p>
         ) : (
@@ -84,6 +109,7 @@ export function MatterDetail() {
                 <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Due</th>
                 <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Received</th>
                 <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Balance</th>
+                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
@@ -95,6 +121,15 @@ export function MatterDetail() {
                   <td className="px-4 py-2 text-sm text-slate-700 dark:text-slate-300">PKR {entry.received.toLocaleString()}</td>
                   <td className={`px-4 py-2 text-sm font-medium ${entry.balance > 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
                     PKR {entry.balance.toLocaleString()}
+                  </td>
+                  <td className="px-4 py-2 text-sm">
+                    <span className={`px-2 py-1 rounded-full text-xs ${
+                      entry.paymentStatus === 'Paid' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                      entry.paymentStatus === 'Partial' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
+                      'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                    }`}>
+                      {entry.paymentStatus}
+                    </span>
                   </td>
                 </tr>
               ))}

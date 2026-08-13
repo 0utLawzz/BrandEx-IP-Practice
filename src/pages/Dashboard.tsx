@@ -1,15 +1,16 @@
-import { mockClients, mockMatters, mockLedgerEntries, mockPayments, mockTrademarks } from '../data/mockData';
+import { clientRepository, matterRepository, ledgerRepository, trademarkRepository } from '../services/dataRepository';
 
 export function Dashboard() {
-  const totalClients = mockClients.length;
-  const totalMatters = mockMatters.length;
-  const totalTrademarks = mockTrademarks.length;
-  const totalDue = mockLedgerEntries.reduce((sum, entry) => sum + entry.due, 0);
-  const totalReceived = mockPayments.reduce((sum, payment) => sum + payment.amount, 0);
+  const totalClients = clientRepository.getAll().length;
+  const totalMatters = matterRepository.getAll().length;
+  const totalTrademarks = trademarkRepository.getAll().length;
+  const ledgerEntries = ledgerRepository.getAll();
+  const totalDue = ledgerEntries.reduce((sum, entry) => sum + entry.due, 0);
+  const totalReceived = ledgerEntries.reduce((sum, entry) => sum + entry.received, 0);
   const totalBalance = totalDue - totalReceived;
 
-  const recentMatters = mockMatters.slice(0, 5);
-  const pendingPayments = mockLedgerEntries.filter(entry => entry.balance > 0);
+  const recentMatters = matterRepository.getAll().slice(0, 5);
+  const pendingPayments = ledgerEntries.filter(entry => entry.balance > 0);
 
   return (
     <div className="space-y-6">

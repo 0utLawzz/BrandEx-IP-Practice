@@ -78,8 +78,8 @@ export function TrademarkDetail() {
             <p className="font-medium text-slate-900 dark:text-slate-50">{trademark.attorney || '-'}</p>
           </div>
           <div>
-            <p className="text-sm text-slate-600 dark:text-slate-400">Consultant</p>
-            <p className="font-medium text-slate-900 dark:text-slate-50">{trademark.consultant || '-'}</p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Agent ID</p>
+            <p className="font-medium text-slate-900 dark:text-slate-50">{trademark.agentId || '-'}</p>
           </div>
         </div>
       </div>

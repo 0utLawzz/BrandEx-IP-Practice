@@ -1,6 +1,6 @@
 // Domain Types for BrandEx IP Practice MVP
 
-export type ClientType = 'A' | 'B' | 'C' | 'D' | 'E';
+export type ClientSeries = 'A' | 'B' | 'C' | 'D' | 'E';
 
 export type MatterType = 'Trademark' | 'Copyright' | 'Company' | 'NTN' | 'Opposition';
 
@@ -23,7 +23,7 @@ export type TrademarkStatus =
 
 export interface Client {
   id: string;
-  clientType: ClientType;
+  series: ClientSeries;
   clientNumber: string;
   clientCode: string;
   name: string;
@@ -48,6 +48,7 @@ export interface Matter {
   title: string;
   description?: string;
   status: string;
+  agentId?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -67,7 +68,7 @@ export interface Trademark {
   address: string;
   logoUrl?: string;
   attorney?: string;
-  consultant?: string;
+  agentId?: string;
   status: TrademarkStatus;
   subStatus?: string;
   city: string;
@@ -88,6 +89,7 @@ export interface LedgerEntry {
   received: number;
   balance: number;
   discount?: number;
+  paymentStatus: PaymentStatus;
   notes?: string;
   createdAt: string;
   updatedAt: string;

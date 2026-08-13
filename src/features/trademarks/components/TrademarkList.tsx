@@ -1,6 +1,8 @@
-import { mockTrademarks } from '../../../data/mockData';
+import { trademarkRepository } from '../../../services/dataRepository';
 
 export function TrademarkList() {
+  const trademarks = trademarkRepository.getAll();
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -47,7 +49,7 @@ export function TrademarkList() {
             </tr>
           </thead>
           <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
-            {mockTrademarks.map((tm) => (
+            {trademarks.map((tm) => (
               <tr key={tm.id} className="hover:bg-slate-50 dark:hover:bg-slate-700">
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                   {new Date(tm.createdAt).toLocaleDateString()}

@@ -1,18 +1,44 @@
-import { mockLedgerEntries, mockClients } from '../../../data/mockData';
+import { useState } from 'react';
+import { ledgerRepository, clientRepository } from '../../../services/dataRepository';
+import { AddLedgerEntryForm } from './AddLedgerEntryForm';
 
 export function Ledger() {
-  const ledgerWithClients = mockLedgerEntries.map(entry => ({
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [ledgerEntries, setLedgerEntries] = useState(ledgerRepository.getAll());
+  const clients = clientRepository.getAll();
+
+  const ledgerWithClients = ledgerEntries.map(entry => ({
     ...entry,
-    client: mockClients.find(c => c.clientCode === entry.matterNumber.split('-')[0] + '-' + entry.matterNumber.split('-')[1]),
+    client: clients.find(c => c.clientCode === entry.matterNumber.split('-')[0] + '-' + entry.matterNumber.split('-')[1]),
   }));
 
   const totalDue = ledgerWithClients.reduce((sum, entry) => sum + entry.due, 0);
   const totalReceived = ledgerWithClients.reduce((sum, entry) => sum + entry.received, 0);
   const totalBalance = ledgerWithClients.reduce((sum, entry) => sum + entry.balance, 0);
 
+  const handleEntryAdded = () => {
+    setLedgerEntries(ledgerRepository.getAll());
+    setShowAddForm(false);
+  };
+
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-50">Payment Ledger</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-50">Payment Ledger</h1>
+        <button 
+          onClick={() => setShowAddForm(true)}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          Add Ledger Entry
+        </button>
+      </div>
+
+      {showAddForm && (
+        <AddLedgerEntryForm 
+          onSuccess={handleEntryAdded}
+          onCancel={() => setShowAddForm(false)}
+        />
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
@@ -59,6 +85,9 @@ export function Ledger() {
               <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 Balance
               </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                Status
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
@@ -87,6 +116,16 @@ export function Ledger() {
                 </td>
                 <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${entry.balance > 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
                   PKR {entry.balance.toLocaleString()}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm">
+                  <span className={`px-2 py-1 rounded-full text-xs ${
+                    entry.paymentStatus === 'Paid' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                    entry.paymentStatus === 'Partial' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
+                    entry.paymentStatus === 'Overpaid' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                    'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                  }`}>
+                    {entry.paymentStatus}
+                  </span>
                 </td>
               </tr>
             ))}
