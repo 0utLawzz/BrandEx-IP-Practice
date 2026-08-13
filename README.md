@@ -1,32 +1,27 @@
-# React + TypeScript + Vite
+# BrandEx IP Practice
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)
+![Automation](https://img.shields.io/badge/Automation-Custom-blue)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
-Currently, two official plugins are available:
+> BrandEx IP Practice — tools and workflows for intellectual property practice management, trademark tracking, and related Brandex operations.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Topics / Keywords
+`brandex` `ip` `trademark` `intellectual-property` `typescript` `react` `vite` `automation` `custom-automation`
 
-## React Compiler
+## Features
+- IP / trademark practice support
+- Modern TypeScript + React stack
+- Built for Brandex workflows
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Author
+**Nadeem (OutLawZ)**  
+Custom Automation Specialist  
 
-## Expanding the Oxlint configuration
+📧 Contact: [net2outlawzz@gmail.com](mailto:net2outlawzz@gmail.com)  
+🔗 GitHub: [0utLawzz](https://github.com/0utLawzz)
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+---
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+*Need custom IP, trademark, or business automation? Contact me.*
