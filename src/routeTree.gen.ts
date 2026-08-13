@@ -10,11 +10,42 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ClientsRouteImport } from './routes/clients'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as LedgerRouteImport } from './routes/ledger'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as MattersRouteImport } from './routes/matters'
+import { Route as PaymentsRouteImport } from './routes/payments'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as TrademarksRouteImport } from './routes/trademarks'
+import { Route as ClientsClientIdRouteImport } from './routes/clients.$clientId'
+import { Route as MattersMatterIdRouteImport } from './routes/matters.$matterId'
+import { Route as TrademarksTrademarkIdRouteImport } from './routes/trademarks.$trademarkId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClientsRoute = ClientsRouteImport.update({
+  id: '/clients',
+  path: '/clients',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LedgerRoute = LedgerRouteImport.update({
+  id: '/ledger',
+  path: '/ledger',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -22,31 +53,147 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MattersRoute = MattersRouteImport.update({
+  id: '/matters',
+  path: '/matters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentsRoute = PaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrademarksRoute = TrademarksRouteImport.update({
+  id: '/trademarks',
+  path: '/trademarks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClientsClientIdRoute = ClientsClientIdRouteImport.update({
+  id: '/$clientId',
+  path: '/$clientId',
+  getParentRoute: () => ClientsRoute,
+} as any)
+const MattersMatterIdRoute = MattersMatterIdRouteImport.update({
+  id: '/$matterId',
+  path: '/$matterId',
+  getParentRoute: () => MattersRoute,
+} as any)
+const TrademarksTrademarkIdRoute = TrademarksTrademarkIdRouteImport.update({
+  id: '/$trademarkId',
+  path: '/$trademarkId',
+  getParentRoute: () => TrademarksRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/clients': typeof ClientsRouteWithChildren
+  '/dashboard': typeof DashboardRoute
+  '/documents': typeof DocumentsRoute
+  '/ledger': typeof LedgerRoute
   '/login': typeof LoginRoute
+  '/matters': typeof MattersRouteWithChildren
+  '/payments': typeof PaymentsRoute
+  '/settings': typeof SettingsRoute
+  '/trademarks': typeof TrademarksRouteWithChildren
+  '/clients/$clientId': typeof ClientsClientIdRoute
+  '/matters/$matterId': typeof MattersMatterIdRoute
+  '/trademarks/$trademarkId': typeof TrademarksTrademarkIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/clients': typeof ClientsRouteWithChildren
+  '/dashboard': typeof DashboardRoute
+  '/documents': typeof DocumentsRoute
+  '/ledger': typeof LedgerRoute
   '/login': typeof LoginRoute
+  '/matters': typeof MattersRouteWithChildren
+  '/payments': typeof PaymentsRoute
+  '/settings': typeof SettingsRoute
+  '/trademarks': typeof TrademarksRouteWithChildren
+  '/clients/$clientId': typeof ClientsClientIdRoute
+  '/matters/$matterId': typeof MattersMatterIdRoute
+  '/trademarks/$trademarkId': typeof TrademarksTrademarkIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/clients': typeof ClientsRouteWithChildren
+  '/dashboard': typeof DashboardRoute
+  '/documents': typeof DocumentsRoute
+  '/ledger': typeof LedgerRoute
   '/login': typeof LoginRoute
+  '/matters': typeof MattersRouteWithChildren
+  '/payments': typeof PaymentsRoute
+  '/settings': typeof SettingsRoute
+  '/trademarks': typeof TrademarksRouteWithChildren
+  '/clients/$clientId': typeof ClientsClientIdRoute
+  '/matters/$matterId': typeof MattersMatterIdRoute
+  '/trademarks/$trademarkId': typeof TrademarksTrademarkIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login'
+  fullPaths:
+    | '/'
+    | '/clients'
+    | '/dashboard'
+    | '/documents'
+    | '/ledger'
+    | '/login'
+    | '/matters'
+    | '/payments'
+    | '/settings'
+    | '/trademarks'
+    | '/clients/$clientId'
+    | '/matters/$matterId'
+    | '/trademarks/$trademarkId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login'
-  id: '__root__' | '/' | '/login'
+  to:
+    | '/'
+    | '/clients'
+    | '/dashboard'
+    | '/documents'
+    | '/ledger'
+    | '/login'
+    | '/matters'
+    | '/payments'
+    | '/settings'
+    | '/trademarks'
+    | '/clients/$clientId'
+    | '/matters/$matterId'
+    | '/trademarks/$trademarkId'
+  id:
+    | '__root__'
+    | '/'
+    | '/clients'
+    | '/dashboard'
+    | '/documents'
+    | '/ledger'
+    | '/login'
+    | '/matters'
+    | '/payments'
+    | '/settings'
+    | '/trademarks'
+    | '/clients/$clientId'
+    | '/matters/$matterId'
+    | '/trademarks/$trademarkId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ClientsRoute: typeof ClientsRouteWithChildren
+  DashboardRoute: typeof DashboardRoute
+  DocumentsRoute: typeof DocumentsRoute
+  LedgerRoute: typeof LedgerRoute
   LoginRoute: typeof LoginRoute
+  MattersRoute: typeof MattersRouteWithChildren
+  PaymentsRoute: typeof PaymentsRoute
+  SettingsRoute: typeof SettingsRoute
+  TrademarksRoute: typeof TrademarksRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +205,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/clients': {
+      id: '/clients'
+      path: '/clients'
+      fullPath: '/clients'
+      preLoaderRoute: typeof ClientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ledger': {
+      id: '/ledger'
+      path: '/ledger'
+      fullPath: '/ledger'
+      preLoaderRoute: typeof LedgerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -65,12 +240,103 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/matters': {
+      id: '/matters'
+      path: '/matters'
+      fullPath: '/matters'
+      preLoaderRoute: typeof MattersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payments': {
+      id: '/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof PaymentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trademarks': {
+      id: '/trademarks'
+      path: '/trademarks'
+      fullPath: '/trademarks'
+      preLoaderRoute: typeof TrademarksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clients/$clientId': {
+      id: '/clients/$clientId'
+      path: '/$clientId'
+      fullPath: '/clients/$clientId'
+      preLoaderRoute: typeof ClientsClientIdRouteImport
+      parentRoute: typeof ClientsRoute
+    }
+    '/matters/$matterId': {
+      id: '/matters/$matterId'
+      path: '/$matterId'
+      fullPath: '/matters/$matterId'
+      preLoaderRoute: typeof MattersMatterIdRouteImport
+      parentRoute: typeof MattersRoute
+    }
+    '/trademarks/$trademarkId': {
+      id: '/trademarks/$trademarkId'
+      path: '/$trademarkId'
+      fullPath: '/trademarks/$trademarkId'
+      preLoaderRoute: typeof TrademarksTrademarkIdRouteImport
+      parentRoute: typeof TrademarksRoute
+    }
   }
 }
 
+interface ClientsRouteChildren {
+  ClientsClientIdRoute: typeof ClientsClientIdRoute
+}
+
+const ClientsRouteChildren: ClientsRouteChildren = {
+  ClientsClientIdRoute: ClientsClientIdRoute,
+}
+
+const ClientsRouteWithChildren =
+  ClientsRoute._addFileChildren(ClientsRouteChildren)
+
+interface MattersRouteChildren {
+  MattersMatterIdRoute: typeof MattersMatterIdRoute
+}
+
+const MattersRouteChildren: MattersRouteChildren = {
+  MattersMatterIdRoute: MattersMatterIdRoute,
+}
+
+const MattersRouteWithChildren =
+  MattersRoute._addFileChildren(MattersRouteChildren)
+
+interface TrademarksRouteChildren {
+  TrademarksTrademarkIdRoute: typeof TrademarksTrademarkIdRoute
+}
+
+const TrademarksRouteChildren: TrademarksRouteChildren = {
+  TrademarksTrademarkIdRoute: TrademarksTrademarkIdRoute,
+}
+
+const TrademarksRouteWithChildren = TrademarksRoute._addFileChildren(
+  TrademarksRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ClientsRoute: ClientsRouteWithChildren,
+  DashboardRoute: DashboardRoute,
+  DocumentsRoute: DocumentsRoute,
+  LedgerRoute: LedgerRoute,
   LoginRoute: LoginRoute,
+  MattersRoute: MattersRouteWithChildren,
+  PaymentsRoute: PaymentsRoute,
+  SettingsRoute: SettingsRoute,
+  TrademarksRoute: TrademarksRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
