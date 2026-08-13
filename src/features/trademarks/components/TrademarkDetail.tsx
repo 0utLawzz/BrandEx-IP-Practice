@@ -1,11 +1,11 @@
 import { useParams, Link } from '@tanstack/react-router';
-import { mockTrademarks, mockMatters, mockClients } from '../../../data/mockData';
+import { trademarkRepository, matterRepository, clientRepository } from '../../../services/dataRepository';
 
 export function TrademarkDetail() {
   const { trademarkId } = useParams({ from: '/trademarks/$trademarkId' });
-  const trademark = mockTrademarks.find(t => t.id === trademarkId);
-  const matter = trademark ? mockMatters.find(m => m.id === trademark.matterId) : null;
-  const client = matter ? mockClients.find(c => c.id === matter.clientId) : null;
+  const trademark = trademarkRepository.getById(trademarkId || '');
+  const matter = trademark ? matterRepository.getById(trademark.matterId) : null;
+  const client = matter ? clientRepository.getById(matter.clientId) : null;
 
   if (!trademark) {
     return <div className="text-[#0C0C0C] opacity-60">Trademark not found</div>;

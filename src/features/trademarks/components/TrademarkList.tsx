@@ -1,16 +1,35 @@
+import { useState } from 'react';
+import { Link } from '@tanstack/react-router';
 import { trademarkRepository } from '../../../services/dataRepository';
+import { CreateTrademarkForm } from './CreateTrademarkForm';
 
 export function TrademarkList() {
-  const trademarks = trademarkRepository.getAll();
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [trademarks, setTrademarks] = useState(trademarkRepository.getAll());
+
+  const handleTrademarkCreated = () => {
+    setTrademarks(trademarkRepository.getAll());
+    setShowCreateForm(false);
+  };
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-4xl font-bebas font-normal text-[#0C0C0C] tracking-wider">TRADEMARKS</h1>
-        <button className="btn-primary px-4 py-2">
+        <button 
+          onClick={() => setShowCreateForm(true)}
+          className="btn-primary px-4 py-2"
+        >
           Add Trademark
         </button>
       </div>
+
+      {showCreateForm && (
+        <CreateTrademarkForm
+          onSuccess={handleTrademarkCreated}
+          onCancel={() => setShowCreateForm(false)}
+        />
+      )}
 
       <div className="card-neo overflow-hidden">
         <table className="table-neo min-w-full">
@@ -44,7 +63,7 @@ export function TrademarkList() {
                 City
               </th>
               <th className="px-6 py-3 text-left text-xs font-mono uppercase tracking-wider">
-                Image
+                Actions
               </th>
             </tr>
           </thead>
@@ -85,7 +104,13 @@ export function TrademarkList() {
                   {tm.city}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0C0C0C]">
-                  {tm.imageUrl ? '📷' : '-'}
+                  <Link
+                    to="/trademarks/$trademarkId"
+                    params={{ trademarkId: tm.id }}
+                    className="text-[#C94A00] hover:text-[#0A6B52] font-mono uppercase text-xs"
+                  >
+                    View Details
+                  </Link>
                 </td>
               </tr>
             ))}

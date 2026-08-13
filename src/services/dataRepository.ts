@@ -11,7 +11,7 @@ let agents = [...mockAgents];
 
 // Client Repository
 export const clientRepository = {
-  getAll: (): Client[] => clients,
+  getAll: (): Client[] => [...clients],
   getById: (id: string): Client | undefined => clients.find(c => c.id === id),
   getByClientCode: (clientCode: string): Client | undefined => clients.find(c => c.clientCode === clientCode),
   create: (client: Omit<Client, 'id' | 'createdAt' | 'updatedAt'>): Client => {
@@ -51,7 +51,7 @@ export const clientRepository = {
 
 // Matter Repository
 export const matterRepository = {
-  getAll: (): Matter[] => matters,
+  getAll: (): Matter[] => [...matters],
   getById: (id: string): Matter | undefined => matters.find(m => m.id === id),
   getByClientId: (clientId: string): Matter[] => matters.filter(m => m.clientId === clientId),
   getByFullMatterNumber: (fullMatterNumber: string): Matter | undefined => 
@@ -93,7 +93,7 @@ export const matterRepository = {
 
 // Ledger Entry Repository
 export const ledgerRepository = {
-  getAll: (): LedgerEntry[] => ledgerEntries,
+  getAll: (): LedgerEntry[] => [...ledgerEntries],
   getById: (id: string): LedgerEntry | undefined => ledgerEntries.find(l => l.id === id),
   getByMatterId: (matterId: string): LedgerEntry[] => ledgerEntries.filter(l => l.matterId === matterId),
   create: (entry: Omit<LedgerEntry, 'id' | 'createdAt' | 'updatedAt' | 'balance' | 'paymentStatus'>): LedgerEntry => {
@@ -147,7 +147,7 @@ export const ledgerRepository = {
 
 // Payment Repository
 export const paymentRepository = {
-  getAll: (): Payment[] => payments,
+  getAll: (): Payment[] => [...payments],
   getById: (id: string): Payment | undefined => payments.find(p => p.id === id),
   getByMatterId: (matterId: string): Payment[] => payments.filter(p => p.matterId === matterId),
   getByLedgerEntryId: (ledgerEntryId: string): Payment[] => payments.filter(p => p.ledgerEntryId === ledgerEntryId),
@@ -196,7 +196,7 @@ export const paymentRepository = {
 
 // Trademark Repository
 export const trademarkRepository = {
-  getAll: (): Trademark[] => trademarks,
+  getAll: (): Trademark[] => [...trademarks],
   getById: (id: string): Trademark | undefined => trademarks.find(t => t.id === id),
   getByMatterId: (matterId: string): Trademark | undefined => trademarks.find(t => t.matterId === matterId),
   create: (trademark: Omit<Trademark, 'id' | 'createdAt' | 'updatedAt'>): Trademark => {

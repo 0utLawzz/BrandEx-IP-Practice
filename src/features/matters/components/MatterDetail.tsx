@@ -1,17 +1,23 @@
 import { useState } from 'react';
 import { useParams, Link } from '@tanstack/react-router';
-import { matterRepository, clientRepository, ledgerRepository, paymentRepository } from '../../../services/dataRepository';
+import { matterRepository, clientRepository, ledgerRepository, paymentRepository, trademarkRepository } from '../../../services/dataRepository';
 import { AddLedgerEntryForm } from '../../ledger/components/AddLedgerEntryForm';
+import { CreateTrademarkForm } from '../../trademarks/components/CreateTrademarkForm';
 import { calculateBalance, calculatePaymentStatus } from '../../../lib/businessLogic';
 
 export function MatterDetail() {
   const { matterId } = useParams({ from: '/matters/$matterId' });
   const [showAddLedgerForm, setShowAddLedgerForm] = useState(false);
+  const [showAddTrademarkForm, setShowAddTrademarkForm] = useState(false);
+  const [, setTick] = useState(0);
+
+  const refreshState = () => setTick(t => t + 1);
   
   const matter = matterRepository.getById(matterId || '');
   const client = matter ? clientRepository.getById(matter.clientId) : null;
   const ledgerEntries = matter ? ledgerRepository.getByMatterId(matter.id) : [];
   const payments = matter ? paymentRepository.getByMatterId(matter.id) : [];
+  const trademark = matter ? trademarkRepository.getByMatterId(matter.id) : undefined;
 
   if (!matter) {
     return <div className="text-[#0C0C0C] opacity-60">Matter not found</div>;
@@ -24,8 +30,12 @@ export function MatterDetail() {
 
   const handleLedgerEntryAdded = () => {
     setShowAddLedgerForm(false);
-    // Force re-render by relying on parent component or state management
-    window.location.reload();
+    refreshState();
+  };
+
+  const handleTrademarkAdded = () => {
+    setShowAddTrademarkForm(false);
+    refreshState();
   };
 
   return (
@@ -38,10 +48,26 @@ export function MatterDetail() {
           <h1 className="text-4xl font-bebas font-normal text-[#0C0C0C] tracking-wider">{matter.title}</h1>
           <p className="text-[#0C0C0C] opacity-60 font-mono uppercase text-sm">{matter.fullMatterNumber} — {matter.matterType}</p>
         </div>
-        <button className="btn-primary px-4 py-2">
-          Edit Matter
-        </button>
+        <div className="flex gap-2">
+          <button 
+            onClick={() => setShowAddTrademarkForm(true)}
+            className="btn-secondary px-4 py-2"
+          >
+            Add Trademark
+          </button>
+          <button className="btn-primary px-4 py-2">
+            Edit Matter
+          </button>
+        </div>
       </div>
+
+      {showAddTrademarkForm && (
+        <CreateTrademarkForm
+          initialMatterId={matter.id}
+          onSuccess={handleTrademarkAdded}
+          onCancel={() => setShowAddTrademarkForm(false)}
+        />
+      )}
 
       {client && (
         <div className="card-neo p-6">
@@ -58,6 +84,43 @@ export function MatterDetail() {
             <div>
               <p className="text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1 opacity-60">Contact</p>
               <p className="text-sm text-[#0C0C0C]">{client.phone || client.email || '-'}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {trademark && (
+        <div className="card-neo p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-bebas font-normal text-[#0C0C0C] tracking-wider">TRADEMARK INFORMATION</h2>
+            <Link
+              to="/trademarks/$trademarkId"
+              params={{ trademarkId: trademark.id }}
+              className="text-[#C94A00] hover:text-[#0A6B52] font-mono uppercase text-xs"
+            >
+              View Trademark Details →
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+              <p className="text-sm font-mono uppercase tracking-wider text-[#0C0C0C] opacity-60">TM Name</p>
+              <p className="font-medium text-[#0C0C0C]">{trademark.trademarkName}</p>
+            </div>
+            <div>
+              <p className="text-sm font-mono uppercase tracking-wider text-[#0C0C0C] opacity-60">TM Number</p>
+              <p className="font-medium text-[#0C0C0C]">{trademark.trademarkNumber || 'Pending'}</p>
+            </div>
+            <div>
+              <p className="text-sm font-mono uppercase tracking-wider text-[#0C0C0C] opacity-60">Class</p>
+              <p className="font-medium text-[#0C0C0C]">{trademark.class}</p>
+            </div>
+            <div>
+              <p className="text-sm font-mono uppercase tracking-wider text-[#0C0C0C] opacity-60">Status</p>
+              <span className={`px-2 py-1 text-xs font-mono uppercase ${
+                trademark.status === 'Certificate Delivered' ? 'badge-complete' : 'badge-review'
+              }`}>
+                {trademark.status}
+              </span>
             </div>
           </div>
         </div>
