@@ -75,19 +75,19 @@ export function CreateMatterForm({ onSuccess, onCancel }: CreateMatterFormProps)
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50 mb-4">Add New Matter</h2>
-        
+      <div className="card-neo p-6 w-full max-w-md">
+        <h2 className="text-2xl font-bebas font-normal text-[#0C0C0C] tracking-wider mb-4">ADD NEW MATTER</h2>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Client *
             </label>
             <select
               value={formData.clientId}
               onChange={(e) => setFormData({ ...formData, clientId: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 ${
-                errors.clientId ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'
+              className={`w-full px-3 py-2 input-neo text-[#0C0C0C] ${
+                errors.clientId ? 'border-[#C94A00]' : ''
               }`}
             >
               <option value="">Select a client</option>
@@ -97,17 +97,17 @@ export function CreateMatterForm({ onSuccess, onCancel }: CreateMatterFormProps)
                 </option>
               ))}
             </select>
-            {errors.clientId && <p className="text-red-500 text-sm mt-1">{errors.clientId}</p>}
+            {errors.clientId && <p className="text-[#C94A00] text-sm mt-1 font-mono">{errors.clientId}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Matter Type
             </label>
             <select
               value={formData.matterType}
               onChange={(e) => setFormData({ ...formData, matterType: e.target.value as MatterType })}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+              className="w-full px-3 py-2 input-neo text-[#0C0C0C]"
             >
               <option value="Trademark">Trademark</option>
               <option value="Copyright">Copyright</option>
@@ -118,40 +118,40 @@ export function CreateMatterForm({ onSuccess, onCancel }: CreateMatterFormProps)
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Title *
             </label>
             <input
               type="text"
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 ${
-                errors.title ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'
+              className={`w-full px-3 py-2 input-neo text-[#0C0C0C] ${
+                errors.title ? 'border-[#C94A00]' : ''
               }`}
             />
-            {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
+            {errors.title && <p className="text-[#C94A00] text-sm mt-1 font-mono">{errors.title}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Description
             </label>
             <textarea
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+              className="w-full px-3 py-2 input-neo text-[#0C0C0C]"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Status
             </label>
             <select
               value={formData.status}
               onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+              className="w-full px-3 py-2 input-neo text-[#0C0C0C]"
             >
               <option value="Pending">Pending</option>
               <option value="In Progress">In Progress</option>
@@ -159,20 +159,20 @@ export function CreateMatterForm({ onSuccess, onCancel }: CreateMatterFormProps)
             </select>
           </div>
 
-          {errors.submit && <p className="text-red-500 text-sm">{errors.submit}</p>}
-          {errors.matterNumber && <p className="text-red-500 text-sm">{errors.matterNumber}</p>}
+          {errors.submit && <p className="text-[#C94A00] text-sm font-mono">{errors.submit}</p>}
+          {errors.matterNumber && <p className="text-[#C94A00] text-sm font-mono">{errors.matterNumber}</p>}
 
           <div className="flex gap-3 pt-4">
             <button
               type="button"
               onClick={onCancel}
-              className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+              className="btn-secondary flex-1 px-4 py-2"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="btn-primary flex-1 px-4 py-2"
             >
               Create Matter
             </button>

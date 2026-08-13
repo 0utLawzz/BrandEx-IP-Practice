@@ -77,18 +77,18 @@ export function CreateClientForm({ onSuccess, onCancel }: CreateClientFormProps)
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50 mb-4">Add New Client</h2>
+      <div className="card-neo p-6 w-full max-w-md">
+        <h2 className="text-2xl font-bebas font-normal text-[#0C0C0C] tracking-wider mb-4">ADD NEW CLIENT</h2>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Series
             </label>
             <select
               value={formData.series}
               onChange={(e) => setFormData({ ...formData, series: e.target.value as ClientSeries })}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+              className="w-full px-3 py-2 input-neo text-[#0C0C0C]"
             >
               <option value="A">A</option>
               <option value="B">B</option>
@@ -99,124 +99,124 @@ export function CreateClientForm({ onSuccess, onCancel }: CreateClientFormProps)
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Name *
             </label>
             <input
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 ${
-                errors.name ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'
+              className={`w-full px-3 py-2 input-neo text-[#0C0C0C] ${
+                errors.name ? 'border-[#C94A00]' : ''
               }`}
             />
-            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+            {errors.name && <p className="text-[#C94A00] text-sm mt-1 font-mono">{errors.name}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Phone
             </label>
             <input
               type="text"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+              className="w-full px-3 py-2 input-neo text-[#0C0C0C]"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               WhatsApp
             </label>
             <input
               type="text"
               value={formData.whatsapp}
               onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+              className="w-full px-3 py-2 input-neo text-[#0C0C0C]"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Email
             </label>
             <input
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+              className="w-full px-3 py-2 input-neo text-[#0C0C0C]"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               City *
             </label>
             <input
               type="text"
               value={formData.city}
               onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 ${
-                errors.city ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'
+              className={`w-full px-3 py-2 input-neo text-[#0C0C0C] ${
+                errors.city ? 'border-[#C94A00]' : ''
               }`}
             />
-            {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
+            {errors.city && <p className="text-[#C94A00] text-sm mt-1 font-mono">{errors.city}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Country *
             </label>
             <input
               type="text"
               value={formData.country}
               onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 ${
-                errors.country ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'
+              className={`w-full px-3 py-2 input-neo text-[#0C0C0C] ${
+                errors.country ? 'border-[#C94A00]' : ''
               }`}
             />
-            {errors.country && <p className="text-red-500 text-sm mt-1">{errors.country}</p>}
+            {errors.country && <p className="text-[#C94A00] text-sm mt-1 font-mono">{errors.country}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Contact Person
             </label>
             <input
               type="text"
               value={formData.contactPerson}
               onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+              className="w-full px-3 py-2 input-neo text-[#0C0C0C]"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Notes
             </label>
             <textarea
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+              className="w-full px-3 py-2 input-neo text-[#0C0C0C]"
             />
           </div>
 
-          {errors.submit && <p className="text-red-500 text-sm">{errors.submit}</p>}
-          {errors.clientCode && <p className="text-red-500 text-sm">{errors.clientCode}</p>}
+          {errors.submit && <p className="text-[#C94A00] text-sm font-mono">{errors.submit}</p>}
+          {errors.clientCode && <p className="text-[#C94A00] text-sm font-mono">{errors.clientCode}</p>}
 
           <div className="flex gap-3 pt-4">
             <button
               type="button"
               onClick={onCancel}
-              className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+              className="btn-secondary flex-1 px-4 py-2"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="btn-primary flex-1 px-4 py-2"
             >
               Create Client
             </button>

@@ -1,1 +1,246 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    /* BrandEx Neo-Brutalism Theme Tokens */
+    --bg2: #0C0C0C;
+    --border: #0C0C0C;
+    --black: #0C0C0C;
+    --bg: #F0E8D0;
+    --panel-hover: #F0E8D0;
+    --bg-alt: #E8DFC7;
+    --panel: #232323;
+    --accent: #C94A00;
+    --accent-primary: #C94A00;
+    --accent4: #0A6B52;
+    --teal: #0A6B52;
+    --accent2: #0D9970;
+    --teal-lt: #0D9970;
+    --accent3: #D4A800;
+    --yellow: #D4A800;
+    --surface: #FAF6EE;
+    
+    /* Border tokens */
+    --border-thin: 2px solid #0C0C0C;
+    --border-thick: 3px solid #0C0C0C;
+    --radius: 0px;
+    --shadow: 5px 5px 0 #0C0C0C;
+    --shadow-sm: 3px 3px 0 #0C0C0C;
+    --shadow-lg: 8px 8px 0 #0C0C0C;
+    --shadow-accent: 5px 5px 0 #C94A00;
+  }
+  
+  * {
+    border-color: var(--border);
+  }
+  
+  body {
+    background-color: var(--bg);
+    color: var(--black);
+    font-family: 'Space Grotesk', Arial, sans-serif;
+  }
+}
+
+@layer components {
+  /* Neo-Brutalism Button Styles */
+  .btn-primary {
+    background-color: var(--accent);
+    color: #FFFFFF;
+    border: 2.5px solid #0C0C0C;
+    border-radius: 6px;
+    box-shadow: 5px 5px 0 #0C0C0C;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    transition: all 0.1s ease;
+  }
+  
+  .btn-primary:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 #0C0C0C;
+  }
+  
+  .btn-primary:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 #0C0C0C;
+  }
+  
+  .btn-secondary {
+    background-color: var(--surface);
+    color: #0C0C0C;
+    border: 2.5px solid #0C0C0C;
+    border-radius: 6px;
+    box-shadow: 5px 5px 0 #0C0C0C;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    transition: all 0.1s ease;
+  }
+  
+  .btn-secondary:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 #0C0C0C;
+  }
+  
+  .btn-secondary:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 #0C0C0C;
+  }
+  
+  /* Neo-Brutalism Card Styles */
+  .card-neo {
+    background-color: var(--surface);
+    border: 3px solid #0C0C0C;
+    border-radius: 6px;
+    box-shadow: 5px 5px 0 #0C0C0C;
+    transition: all 0.1s ease;
+  }
+  
+  .card-neo:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 #0C0C0C;
+  }
+  
+  /* Neo-Brutalism Input Styles */
+  .input-neo {
+    background-color: var(--surface);
+    border: 2px solid #0C0C0C;
+    border-radius: 0px;
+    transition: all 0.1s ease;
+  }
+  
+  .input-neo:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(201, 74, 0, 0.20);
+    outline: none;
+  }
+  
+  .input-neo::placeholder {
+    color: rgba(12, 12, 12, 0.35);
+  }
+  
+  /* Neo-Brutalism Status Badges */
+  .badge-draft {
+    border: 2px solid rgba(12, 12, 12, 0.40);
+    color: #555555;
+    background-color: rgba(12, 12, 12, 0.05);
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+  }
+  
+  .badge-complete {
+    border: 2px solid #0D9970;
+    color: #0A6B52;
+    background-color: rgba(13, 153, 112, 0.05);
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+  }
+  
+  .badge-review {
+    border: 2px solid #C94A00;
+    color: #C94A00;
+    background-color: rgba(201, 74, 0, 0.05);
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+  }
+  
+  .badge-approved {
+    border: 2px solid #0A6B52;
+    color: #0A6B52;
+    background-color: rgba(10, 107, 82, 0.05);
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+  }
+  
+  .badge-scheduled {
+    border: 2px solid #D4A800;
+    color: #8a6800;
+    background-color: rgba(212, 168, 0, 0.05);
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+  }
+  
+  .badge-published {
+    border: 2px solid #8B2FC9;
+    color: #8B2FC9;
+    background-color: rgba(139, 47, 201, 0.05);
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+  }
+  
+  /* Neo-Brutalism Stamp Styles */
+  .stamp {
+    font-family: 'Bebas Neue', 'Arial Black', Arial, sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    border: 3px solid #0C0C0C;
+    border-radius: 6px;
+    padding: 4px 12px;
+    display: inline-block;
+  }
+  
+  .stamp-yellow {
+    background-color: #D4A800;
+    color: #0C0C0C;
+  }
+  
+  .stamp-teal {
+    background-color: #0D9970;
+    color: #FFFFFF;
+  }
+  
+  .stamp-orange {
+    background-color: #C94A00;
+    color: #FFFFFF;
+  }
+  
+  .stamp-rotate-9 {
+    transform: rotate(-9deg);
+  }
+  
+  .stamp-rotate-5 {
+    transform: rotate(5deg);
+  }
+  
+  .stamp-rotate-4 {
+    transform: rotate(-4deg);
+  }
+  
+  /* Neo-Brutalism Navbar */
+  .navbar-neo {
+    background-color: #0C0C0C;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  /* Neo-Brutalism Table */
+  .table-neo {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  .table-neo th {
+    background-color: var(--bg-alt);
+    border: 2px solid #0C0C0C;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  
+  .table-neo td {
+    border: 2px solid #0C0C0C;
+  }
+  
+  .table-neo tr:hover td {
+    background-color: var(--panel-hover);
+  }
+}

@@ -89,21 +89,21 @@ export function AddLedgerEntryForm({ matterId: propMatterId, onSuccess, onCancel
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50 mb-4">Add Ledger Entry</h2>
-        
+      <div className="card-neo p-6 w-full max-w-md">
+        <h2 className="text-2xl font-bebas font-normal text-[#0C0C0C] tracking-wider mb-4">ADD LEDGER ENTRY</h2>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Matter *
             </label>
             <select
               value={formData.matterId}
               onChange={(e) => setFormData({ ...formData, matterId: e.target.value })}
               disabled={!!propMatterId}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 ${
-                errors.matterId ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'
-              } ${propMatterId ? 'bg-slate-100 dark:bg-slate-600' : ''}`}
+              className={`w-full px-3 py-2 input-neo text-[#0C0C0C] ${
+                errors.matterId ? 'border-[#C94A00]' : ''
+              } ${propMatterId ? 'bg-[#E8DFC7]' : ''}`}
             >
               <option value="">Select a matter</option>
               {matters.map((matter) => (
@@ -112,65 +112,65 @@ export function AddLedgerEntryForm({ matterId: propMatterId, onSuccess, onCancel
                 </option>
               ))}
             </select>
-            {errors.matterId && <p className="text-red-500 text-sm mt-1">{errors.matterId}</p>}
+            {errors.matterId && <p className="text-[#C94A00] text-sm mt-1 font-mono">{errors.matterId}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Date *
             </label>
             <input
               type="date"
               value={formData.date}
               onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 ${
-                errors.date ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'
+              className={`w-full px-3 py-2 input-neo text-[#0C0C0C] ${
+                errors.date ? 'border-[#C94A00]' : ''
               }`}
             />
-            {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date}</p>}
+            {errors.date && <p className="text-[#C94A00] text-sm mt-1 font-mono">{errors.date}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Trademark Number
             </label>
             <input
               type="text"
               value={formData.trademarkNumber}
               onChange={(e) => setFormData({ ...formData, trademarkNumber: e.target.value })}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+              className="w-full px-3 py-2 input-neo text-[#0C0C0C]"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Applicant Name *
             </label>
             <input
               type="text"
               value={formData.applicantName}
               onChange={(e) => setFormData({ ...formData, applicantName: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 ${
-                errors.applicantName ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'
+              className={`w-full px-3 py-2 input-neo text-[#0C0C0C] ${
+                errors.applicantName ? 'border-[#C94A00]' : ''
               }`}
             />
-            {errors.applicantName && <p className="text-red-500 text-sm mt-1">{errors.applicantName}</p>}
+            {errors.applicantName && <p className="text-[#C94A00] text-sm mt-1 font-mono">{errors.applicantName}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Class
             </label>
             <input
               type="number"
               value={formData.class}
               onChange={(e) => setFormData({ ...formData, class: e.target.value })}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+              className="w-full px-3 py-2 input-neo text-[#0C0C0C]"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Due Amount *
             </label>
             <input
@@ -178,15 +178,15 @@ export function AddLedgerEntryForm({ matterId: propMatterId, onSuccess, onCancel
               step="0.01"
               value={formData.due}
               onChange={(e) => setFormData({ ...formData, due: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 ${
-                errors.due ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'
+              className={`w-full px-3 py-2 input-neo text-[#0C0C0C] ${
+                errors.due ? 'border-[#C94A00]' : ''
               }`}
             />
-            {errors.due && <p className="text-red-500 text-sm mt-1">{errors.due}</p>}
+            {errors.due && <p className="text-[#C94A00] text-sm mt-1 font-mono">{errors.due}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Received Amount
             </label>
             <input
@@ -194,15 +194,15 @@ export function AddLedgerEntryForm({ matterId: propMatterId, onSuccess, onCancel
               step="0.01"
               value={formData.received}
               onChange={(e) => setFormData({ ...formData, received: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 ${
-                errors.received ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'
+              className={`w-full px-3 py-2 input-neo text-[#0C0C0C] ${
+                errors.received ? 'border-[#C94A00]' : ''
               }`}
             />
-            {errors.received && <p className="text-red-500 text-sm mt-1">{errors.received}</p>}
+            {errors.received && <p className="text-[#C94A00] text-sm mt-1 font-mono">{errors.received}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Discount
             </label>
             <input
@@ -210,38 +210,38 @@ export function AddLedgerEntryForm({ matterId: propMatterId, onSuccess, onCancel
               step="0.01"
               value={formData.discount}
               onChange={(e) => setFormData({ ...formData, discount: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 ${
-                errors.discount ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'
+              className={`w-full px-3 py-2 input-neo text-[#0C0C0C] ${
+                errors.discount ? 'border-[#C94A00]' : ''
               }`}
             />
-            {errors.discount && <p className="text-red-500 text-sm mt-1">{errors.discount}</p>}
+            {errors.discount && <p className="text-[#C94A00] text-sm mt-1 font-mono">{errors.discount}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1">
               Notes
             </label>
             <textarea
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+              className="w-full px-3 py-2 input-neo text-[#0C0C0C]"
             />
           </div>
 
-          {errors.submit && <p className="text-red-500 text-sm">{errors.submit}</p>}
+          {errors.submit && <p className="text-[#C94A00] text-sm font-mono">{errors.submit}</p>}
 
           <div className="flex gap-3 pt-4">
             <button
               type="button"
               onClick={onCancel}
-              className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+              className="btn-secondary flex-1 px-4 py-2"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="btn-primary flex-1 px-4 py-2"
             >
               Add Entry
             </button>

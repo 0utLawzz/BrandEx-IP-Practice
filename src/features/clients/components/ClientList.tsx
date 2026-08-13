@@ -15,10 +15,10 @@ export function ClientList() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-50">Clients</h1>
+        <h1 className="text-4xl font-bebas font-normal text-[#0C0C0C] tracking-wider">CLIENTS</h1>
         <button 
           onClick={() => setShowCreateForm(true)}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="btn-primary px-4 py-2"
         >
           Add Client
         </button>
@@ -31,47 +31,47 @@ export function ClientList() {
         />
       )}
 
-      <div className="bg-white dark:bg-slate-800 rounded-lg shadow overflow-hidden">
-        <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
-          <thead className="bg-slate-50 dark:bg-slate-900">
+      <div className="card-neo overflow-hidden">
+        <table className="table-neo min-w-full">
+          <thead>
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-mono uppercase tracking-wider">
                 Client Code
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-mono uppercase tracking-wider">
                 Name
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-mono uppercase tracking-wider">
                 City
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-mono uppercase tracking-wider">
                 Phone
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-mono uppercase tracking-wider">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
+          <tbody>
             {clients.map((client) => (
-              <tr key={client.id} className="hover:bg-slate-50 dark:hover:bg-slate-700">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-slate-50">
+              <tr key={client.id}>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-mono font-medium text-[#0C0C0C]">
                   {client.clientCode}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0C0C0C]">
                   {client.name}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0C0C0C]">
                   {client.city}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0C0C0C]">
                   {client.phone || '-'}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0C0C0C]">
                   <Link
                     to="/clients/$clientId"
                     params={{ clientId: client.id }}
-                    className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                    className="text-[#C94A00] hover:text-[#0A6B52] font-mono uppercase text-xs"
                   >
                     View Details
                   </Link>

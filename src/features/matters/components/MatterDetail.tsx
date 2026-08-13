@@ -14,7 +14,7 @@ export function MatterDetail() {
   const payments = matter ? paymentRepository.getByMatterId(matter.id) : [];
 
   if (!matter) {
-    return <div className="text-slate-600 dark:text-slate-400">Matter not found</div>;
+    return <div className="text-[#0C0C0C] opacity-60">Matter not found</div>;
   }
 
   const totalDue = ledgerEntries.reduce((sum, entry) => sum + entry.due, 0);
@@ -32,101 +32,101 @@ export function MatterDetail() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <Link to="/matters" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 mb-2 inline-block">
+          <Link to="/matters" className="text-[#C94A00] hover:text-[#0A6B52] font-mono uppercase text-xs mb-2 inline-block">
             ← Back to Matters
           </Link>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-50">{matter.title}</h1>
-          <p className="text-slate-600 dark:text-slate-400">{matter.fullMatterNumber} — {matter.matterType}</p>
+          <h1 className="text-4xl font-bebas font-normal text-[#0C0C0C] tracking-wider">{matter.title}</h1>
+          <p className="text-[#0C0C0C] opacity-60 font-mono uppercase text-sm">{matter.fullMatterNumber} — {matter.matterType}</p>
         </div>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+        <button className="btn-primary px-4 py-2">
           Edit Matter
         </button>
       </div>
 
       {client && (
-        <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Client Information</h2>
+        <div className="card-neo p-6">
+          <h2 className="text-2xl font-bebas font-normal text-[#0C0C0C] tracking-wider mb-4">CLIENT INFORMATION</h2>
           <div className="flex items-center gap-4">
             <div>
-              <p className="text-sm text-slate-600 dark:text-slate-400">Client Code</p>
-              <p className="font-medium text-slate-900 dark:text-slate-50">{client.clientCode}</p>
+              <p className="text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1 opacity-60">Client Code</p>
+              <p className="font-mono uppercase text-sm text-[#0C0C0C]">{client.clientCode}</p>
             </div>
             <div>
-              <p className="text-sm text-slate-600 dark:text-slate-400">Client Name</p>
-              <p className="font-medium text-slate-900 dark:text-slate-50">{client.name}</p>
+              <p className="text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1 opacity-60">Client Name</p>
+              <p className="text-sm text-[#0C0C0C]">{client.name}</p>
             </div>
             <div>
-              <p className="text-sm text-slate-600 dark:text-slate-400">Contact</p>
-              <p className="font-medium text-slate-900 dark:text-slate-50">{client.phone || client.email || '-'}</p>
+              <p className="text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-1 opacity-60">Contact</p>
+              <p className="text-sm text-[#0C0C0C]">{client.phone || client.email || '-'}</p>
             </div>
           </div>
         </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-2">Total Due</h3>
-          <p className="text-2xl font-bold text-slate-900 dark:text-slate-50">PKR {totalDue.toLocaleString()}</p>
+        <div className="card-neo p-6">
+          <h3 className="text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-2 opacity-60">Total Due</h3>
+          <p className="text-4xl font-bebas font-normal text-[#0C0C0C]">PKR {totalDue.toLocaleString()}</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-2">Total Received</h3>
-          <p className="text-2xl font-bold text-green-600 dark:text-green-400">PKR {totalReceived.toLocaleString()}</p>
+        <div className="card-neo p-6">
+          <h3 className="text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-2 opacity-60">Total Received</h3>
+          <p className="text-4xl font-bebas font-normal text-[#0A6B52]">PKR {totalReceived.toLocaleString()}</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-2">Balance</h3>
-          <p className={`text-2xl font-bold ${totalBalance > 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
+        <div className="card-neo p-6">
+          <h3 className="text-sm font-mono uppercase tracking-wider text-[#0C0C0C] mb-2 opacity-60">Balance</h3>
+          <p className={`text-4xl font-bebas font-normal ${totalBalance > 0 ? 'text-[#C94A00]' : 'text-[#0A6B52]'}`}>
             PKR {totalBalance.toLocaleString()}
           </p>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Status: {paymentStatus}</p>
+          <p className="text-sm font-mono uppercase text-[#0C0C0C] mt-1 opacity-60">Status: {paymentStatus}</p>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
+      <div className="card-neo p-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Ledger Entries</h2>
-          <button 
+          <h2 className="text-2xl font-bebas font-normal text-[#0C0C0C] tracking-wider">LEDGER ENTRIES</h2>
+          <button
             onClick={() => setShowAddLedgerForm(true)}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="btn-primary px-4 py-2"
           >
             Add Ledger Entry
           </button>
         </div>
         {showAddLedgerForm && (
-          <AddLedgerEntryForm 
+          <AddLedgerEntryForm
             matterId={matter.id}
             onSuccess={handleLedgerEntryAdded}
             onCancel={() => setShowAddLedgerForm(false)}
           />
         )}
         {ledgerEntries.length === 0 ? (
-          <p className="text-slate-600 dark:text-slate-400">No ledger entries found</p>
+          <p className="text-[#0C0C0C] opacity-60">No ledger entries found</p>
         ) : (
-          <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
-            <thead className="bg-slate-50 dark:bg-slate-900">
+          <table className="table-neo min-w-full">
+            <thead>
               <tr>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Date</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">TM No</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Due</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Received</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Balance</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Status</th>
+                <th className="px-4 py-2 text-left text-xs font-mono uppercase">Date</th>
+                <th className="px-4 py-2 text-left text-xs font-mono uppercase">TM No</th>
+                <th className="px-4 py-2 text-left text-xs font-mono uppercase">Due</th>
+                <th className="px-4 py-2 text-left text-xs font-mono uppercase">Received</th>
+                <th className="px-4 py-2 text-left text-xs font-mono uppercase">Balance</th>
+                <th className="px-4 py-2 text-left text-xs font-mono uppercase">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+            <tbody>
               {ledgerEntries.map((entry) => (
-                <tr key={entry.id} className="hover:bg-slate-50 dark:hover:bg-slate-700">
-                  <td className="px-4 py-2 text-sm text-slate-900 dark:text-slate-50">{entry.date}</td>
-                  <td className="px-4 py-2 text-sm text-slate-700 dark:text-slate-300">{entry.trademarkNumber || '-'}</td>
-                  <td className="px-4 py-2 text-sm text-slate-700 dark:text-slate-300">PKR {entry.due.toLocaleString()}</td>
-                  <td className="px-4 py-2 text-sm text-slate-700 dark:text-slate-300">PKR {entry.received.toLocaleString()}</td>
-                  <td className={`px-4 py-2 text-sm font-medium ${entry.balance > 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
+                <tr key={entry.id}>
+                  <td className="px-4 py-2 text-sm text-[#0C0C0C]">{entry.date}</td>
+                  <td className="px-4 py-2 text-sm text-[#0C0C0C]">{entry.trademarkNumber || '-'}</td>
+                  <td className="px-4 py-2 text-sm text-[#0C0C0C]">PKR {entry.due.toLocaleString()}</td>
+                  <td className="px-4 py-2 text-sm text-[#0C0C0C]">PKR {entry.received.toLocaleString()}</td>
+                  <td className={`px-4 py-2 text-sm font-mono font-medium ${entry.balance > 0 ? 'text-[#C94A00]' : 'text-[#0A6B52]'}`}>
                     PKR {entry.balance.toLocaleString()}
                   </td>
                   <td className="px-4 py-2 text-sm">
-                    <span className={`px-2 py-1 rounded-full text-xs ${
-                      entry.paymentStatus === 'Paid' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
-                      entry.paymentStatus === 'Partial' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
-                      'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                    <span className={`px-2 py-1 text-xs font-mono uppercase ${
+                      entry.paymentStatus === 'Paid' ? 'badge-complete' :
+                      entry.paymentStatus === 'Partial' ? 'badge-review' :
+                      'badge-draft'
                     }`}>
                       {entry.paymentStatus}
                     </span>
@@ -138,37 +138,37 @@ export function MatterDetail() {
         )}
       </div>
 
-      <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Payment Records</h2>
+      <div className="card-neo p-6">
+        <h2 className="text-2xl font-bebas font-normal text-[#0C0C0C] tracking-wider mb-4">PAYMENT RECORDS</h2>
         {payments.length === 0 ? (
-          <p className="text-slate-600 dark:text-slate-400">No payment records found</p>
+          <p className="text-[#0C0C0C] opacity-60">No payment records found</p>
         ) : (
-          <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
-            <thead className="bg-slate-50 dark:bg-slate-900">
+          <table className="table-neo min-w-full">
+            <thead>
               <tr>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Date</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Amount</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Method</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Status</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Reference</th>
+                <th className="px-4 py-2 text-left text-xs font-mono uppercase">Date</th>
+                <th className="px-4 py-2 text-left text-xs font-mono uppercase">Amount</th>
+                <th className="px-4 py-2 text-left text-xs font-mono uppercase">Method</th>
+                <th className="px-4 py-2 text-left text-xs font-mono uppercase">Status</th>
+                <th className="px-4 py-2 text-left text-xs font-mono uppercase">Reference</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+            <tbody>
               {payments.map((payment) => (
-                <tr key={payment.id} className="hover:bg-slate-50 dark:hover:bg-slate-700">
-                  <td className="px-4 py-2 text-sm text-slate-900 dark:text-slate-50">{payment.date}</td>
-                  <td className="px-4 py-2 text-sm text-slate-700 dark:text-slate-300">PKR {payment.amount.toLocaleString()}</td>
-                  <td className="px-4 py-2 text-sm text-slate-700 dark:text-slate-300">{payment.method}</td>
+                <tr key={payment.id}>
+                  <td className="px-4 py-2 text-sm text-[#0C0C0C]">{payment.date}</td>
+                  <td className="px-4 py-2 text-sm text-[#0C0C0C]">PKR {payment.amount.toLocaleString()}</td>
+                  <td className="px-4 py-2 text-sm text-[#0C0C0C]">{payment.method}</td>
                   <td className="px-4 py-2 text-sm">
-                    <span className={`px-2 py-1 rounded-full text-xs ${
-                      payment.status === 'Paid' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
-                      payment.status === 'Partial' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
-                      'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                    <span className={`px-2 py-1 text-xs font-mono uppercase ${
+                      payment.status === 'Paid' ? 'badge-complete' :
+                      payment.status === 'Partial' ? 'badge-review' :
+                      'badge-draft'
                     }`}>
                       {payment.status}
                     </span>
                   </td>
-                  <td className="px-4 py-2 text-sm text-slate-700 dark:text-slate-300">{payment.reference || '-'}</td>
+                  <td className="px-4 py-2 text-sm text-[#0C0C0C]">{payment.reference || '-'}</td>
                 </tr>
               ))}
             </tbody>
